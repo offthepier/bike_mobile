@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:phone_app/pages/mqqt_test.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:phone_app/provider/user_session_provider.dart';
 import 'package:phone_app/provider/wrk_type_provider.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             useMaterial3: true,
           ),
+          // home: MqttTest(), // comment out to test MQTT
           home: const AuthWrapper()),
     );
   }
