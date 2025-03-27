@@ -16,9 +16,8 @@ from dotenv import load_dotenv
 
 
 # load environment variables from .env file from project root
-print(Path('.'))
-env_path = Path('.') / '.env'
-load_dotenv(env_path)
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+load_dotenv(BASE_DIR / ".env")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY') 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'True' 
+DEBUG = True 
 
 
 # settings.py
@@ -55,6 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'corsheaders',
     'django.contrib.staticfiles',
     'backend_server'
 ]
@@ -63,6 +63,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -199,13 +200,15 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+CORS_ALLOW_ALL_ORIGINS = True
+
 
 #forget password
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
-EMAIL_PORT = 2525
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'c1b94fb9443342'
-EMAIL_HOST_PASSWORD = '73d6f00407f892'
-EMAIL_USE_SSL = False
-DEFAULT_FROM_EMAIL = 'webmaster@example.com'
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+#EMAIL_PORT = 2525
+#EMAIL_USE_TLS = True
+#MAIL_HOST_USER = 'c1b94fb9443342'
+#EMAIL_HOST_PASSWORD = '73d6f00407f892'
+#EMAIL_USE_SSL = False
+#DEFAULT_FROM_EMAIL = 'webmaster@example.com'
