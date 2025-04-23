@@ -94,12 +94,30 @@ WSGI_APPLICATION = 'backend_server.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+from mongoengine import connect
+from urllib.parse import quote_plus
+
+MONGO_USER = os.getenv("MONGO_USER")
+MONGO_PASSWORD = quote_plus(os.getenv("MONGO_PASSWORD"))
+
+connect(
+    db='redback_bike',
+    host=f"mongodb+srv://{MONGO_USER}:{MONGO_PASSWORD}@cluster0.w70fu.mongodb.net/redback_bike?retryWrites=true&w=majority&appName=Cluster0",
+    username=MONGO_USER,
+    password=os.getenv("MONGO_PASSWORD"),
+    authentication_source='admin'
+)
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.dummy'
     }
 }
+
+
+
+
+
 
 
 # Password validation
@@ -201,6 +219,7 @@ CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CORS_ALLOW_ALL_ORIGINS = True
+
 
 
 #forget password
