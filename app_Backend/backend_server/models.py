@@ -225,3 +225,9 @@ class WorkoutAnalysis(models.Model):
     avg_heart_rate = models.IntegerField(null=True, blank=True)
     workout_duration = models.IntegerField(null=True, blank=True)
     avg_temperature = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
+
+from mongoengine import Document, StringField, DateTimeField
+
+class RideData(Document):
+    user_id = StringField(required=True)
+    timestamp = DateTimeField()
