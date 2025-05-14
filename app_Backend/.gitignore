@@ -39,3 +39,4 @@ backend_server/media/
 
 # Ignore Django migrations
 backend_server/*/migrations/
+.env
